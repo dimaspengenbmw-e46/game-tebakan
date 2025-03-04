@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teka Teki Otak</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="assets/icon.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <a href="https://github.com/dimaspengenbmw-e46" class="github-button" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-github"></i>
+  </a>
+  <!-- Interface Utama -->
+  <div id="main-menu" class="menu">
+    <h1 class="game-title">
+      <span>T</span>
+      <span>e</span>
+      <span>k</span>
+      <span>a</span>
+      <span>&nbsp;</span>
+      <span>T</span>
+      <span>e</span>
+      <span>k</span>
+      <span>i</span>
+      <span>&nbsp;</span>
+      <span>S</span>
+      <span>e</span>
+      <span>r</span>
+      <span>u</span>
+    </h1>
+    <div class="button-container" style="display: flex; flex-direction: column; align-items: center;">
+      <button id="start-button">
+        <i class="fas fa-play"></i>
+        Mulai
+      </button>
+      <button id="shop-button">
+        <i class="fas fa-store"></i>
+        Toko
+      </button>
+      <button id="music-button">
+        <i class="fas fa-music"></i>
+        Musik
+      </button>
+      <a href="https://wa.me/62895393330695" id="report-button">
+        <i class="fab fa-whatsapp"></i>
+        <span class="chat-text">Chat Developer</span>
+        <span class="chat-emoji">⚡</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Menu Level -->
+  <div id="level-menu" class="menu hidden">
+    <div class="level-header">
+      <button id="back-to-main-levels" class="back-button">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <h2>Pilih Level</h2>
+    </div>
+    <div id="level-list"></div>
+  </div>
+
+  <!-- Gameplay -->
+  <div id="gameplay" class="hidden">
+    <div class="game-header">
+      <span>❤️ <span id="lives">20</span></span>
+      <span>💡 <span id="hints">20</span></span>
+      <span>⏳ <span id="timer">30</span> detik</span>
+    </div>
+    <div class="question-box">
+      <h2 id="level-title">Level 1</h2>
+      <p id="question">Pertanyaan akan muncul di sini</p>
+      <input type="text" id="answer-input" placeholder="masukkin jawaban mu ">
+      <div class="button-group">
+        <button id="submit-answer">
+          <i class="fas fa-paper-plane"></i>
+          Kirim
+        </button>
+        <button id="use-hint">
+          <i class="far fa-lightbulb"></i>
+          Hint
+        </button>
+        <button id="back-to-levels">
+          <i class="fas fa-arrow-left"></i>
+          Kembali ke Level
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toko -->
+  <div id="shop" class="menu hidden">
+    <h2>Toko</h2>
+    <div>
+      <h3>Beli Nyawa</h3>
+      <button class="buy-button" data-item="life" data-quantity="10" data-price="1000">
+        <i class="fas fa-heart"></i>
+        10 Nyawa - Rp 1000
+      </button>
+      <button class="buy-button" data-item="life" data-quantity="30" data-price="3000">
+        <i class="fas fa-heart"></i>
+        30 Nyawa - Rp 3000
+      </button>
+      <button class="buy-button" data-item="life" data-quantity="100" data-price="10000">
+        <i class="fas fa-heart"></i>
+        100 Nyawa - Rp 10.000
+      </button>
+    </div>
+    <div>
+      <h3>Beli Hint</h3>
+      <button class="buy-button" data-item="hint" data-quantity="5" data-price="3000">
+        <i class="far fa-lightbulb"></i>
+        5 Hint - Rp 3000
+      </button>
+      <button class="buy-button" data-item="hint" data-quantity="10" data-price="6000">
+        <i class="far fa-lightbulb"></i>
+        10 Hint - Rp 6000
+      </button>
+      <button class="buy-button" data-item="hint" data-quantity="20" data-price="10000">
+        <i class="far fa-lightbulb"></i>
+        20 Hint - Rp 10.000
+      </button>
+    </div>
+    <button id="back-to-main-shop">
+      <i class="fas fa-home"></i>
+      Kembali ke Menu Utama
+    </button>
+  </div>
+
+  <!-- Music Menu -->
+  <div id="music-menu" class="menu hidden">
+    <h2>Pilih Musik</h2>
+    <div class="button-group">
+      <button class="music-option" data-music="music1">
+        <i class="fas fa-play-circle"></i>
+        Lagu Santai
+      </button>
+      <button class="music-option" data-music="music2">
+        <i class="fas fa-play-circle"></i>
+        Lagu Semangat
+      </button>
+      <button class="music-option" data-music="music3">
+        <i class="fas fa-play-circle"></i>
+        Lagu Fokus
+      </button>
+      <button class="music-option" data-music="none">
+        <i class="fas fa-volume-mute"></i>
+        Tanpa Musik
+      </button>
+    </div>
+    <button id="back-to-main-music">
+      <i class="fas fa-home"></i>
+      Kembali ke Menu Utama
+    </button>
+  </div>
+
+  <audio id="background-music" loop>
+    <source src="assets/background-music.mp3" type="audio/mpeg">
+  </audio>
+
+  <audio id="music1" loop>
+    <source src="janger.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="music2" loop>
+    <source src="assets/music/semangat.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="music3" loop>
+    <source src="nfsc canyon.mp3" type="audio/mpeg">
+  </audio>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>

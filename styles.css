@@ -1,0 +1,596 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: #fff;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  transition: background 0.8s ease;
+}
+
+.menu {
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  padding: 25px;
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
+  animation: bounce 0.5s ease;
+  max-width: 90%;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Tombol home display */
+button {
+  background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  margin: 8px auto;
+  cursor: pointer;
+  border-radius: 25px;
+  font-size: 18px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  width: 100%;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  background: linear-gradient(135deg, #FF8E8E, #FFA5A5);
+}
+
+/* Override khusus untuk tombol-tombol aksi */
+#submit-answer {
+  background-color: #4CAF50;
+}
+
+#submit-answer:hover {
+  background-color: #43A047;
+}
+
+#use-hint {
+  background-color: #FFB74D;
+}
+
+#use-hint:hover {
+  background-color: #FB8C00;
+}
+
+a#report-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: linear-gradient(135deg, #FF69B4, #FFB6C1);
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  margin-top: 20px;
+  cursor: pointer;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 280px;
+  box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+a#report-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 105, 180, 0.4);
+  background: linear-gradient(135deg, #22db2b, #FF69B4);
+}
+
+a#report-button i {
+  font-size: 20px;
+  color: #fff;
+  animation: bounce 2s infinite;
+}
+
+a#report-button .chat-text {
+  margin: 0 5px;
+}
+
+a#report-button .chat-emoji {
+  font-size: 16px; /* Match font size with text */
+  animation: lightning 1.5s infinite;
+  text-shadow: 0 0 10px #FFD700;
+  position: relative;
+  top: -1px; /* Slight adjustment to align with text */
+  margin-left: 4px; /* Add some space between text and emoji */
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Level Menu */
+.level-header {
+  position: relative;
+  width: 100%;
+  padding: 10px 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  display: flex;
+  align-items: center; /* Pastikan kontennya sejajar vertikal */
+  justify-content: center;
+  z-index: 0;
+}
+.back-button {
+  position: absolute;
+  left: 10px;
+  top: 25%;
+  transform: translateY(-0%);
+  width: 28px;  /* Ukuran kotak */
+  height: 28px; /* Ukuran kotak */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px; /* Sesuaikan ukuran ikon */
+  background: rgba(248, 248, 248, 0.2); /* Warna latar sedikit transparan */
+  border-radius: 5px; /* Buat kotak dengan sudut sedikit melengkung */
+  border: none;
+  cursor: pointer;
+  z-index: 2;
+}
+/* Level List */
+#level-list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin: 20px auto;
+  padding: 15px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.level-button {
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  padding: 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  color: #fff;
+  border: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.level-button:hover:not(.disabled) {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.level-button.disabled {
+  background: linear-gradient(135deg, #cccccc, #999999);
+  cursor: not-allowed;
+  opacity: 0.7;
+  transform: none;
+  box-shadow: none;
+}
+
+.level-button.current {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  animation: pulse 2s infinite;
+}
+
+/* Gameplay */
+#gameplay {
+  max-width: 90%;
+  width: 400px;
+  animation: fadeIn 1s ease forwards;
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.game-header span {
+  font-size: 24px;
+  animation: pulse 2s infinite;
+}
+
+.question-box {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 20px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  animation: fadeIn 1s ease forwards;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.question-box h2 {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.question-box p {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.question-box input {
+  width: 100%;
+  max-width: 280px;
+  padding: 10px;
+  margin: 0 0 15px 0;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.question-box button {
+  width: 100%;
+  max-width: 280px;
+  margin: 5px 0;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+#question {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+#answer-input {
+  width: 100%;
+  max-width: 280px;
+  padding: 10px;
+  margin: 0 auto 10px auto;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+/* Responsif */
+@media (max-width: 600px) {
+  #level-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .game-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .level-header {
+    padding: 15px;
+  }
+
+  .back-button {
+    font-size: 20px;
+    left: 5px;
+  }
+
+  .level-title {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu {
+    width: 85%;
+    padding: 15px;
+  }
+
+  button, a#report-button {
+    padding: 10px 18px;
+    font-size: 16px;
+    width: 90%;
+  }
+
+  #level-list {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+}
+
+/* Animasi */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes vibrate {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  20%, 60% {
+    transform: translateX(-2px);
+  }
+  40%, 80% {
+    transform: translateX(2px);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes titleBounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes lightning {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    text-shadow: 0 0 10px #FFD700;
+  }
+  25% {
+    opacity: 0.8;
+    transform: scale(1.2);
+    text-shadow: 0 0 20px #FFD700, 0 0 30px #FFA500;
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+    text-shadow: 0 0 15px #FFD700;
+  }
+  75% {
+    opacity: 0.8;
+    transform: scale(1.1);
+    text-shadow: 0 0 25px #FFD700, 0 0 35px #FFA500;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    text-shadow: 0 0 10px #FFD700;
+  }
+}
+
+body.vibrate {
+  animation: vibrate 0.3s linear;
+}
+
+button, a#report-button {
+  width: 100%;
+  max-width: 280px;
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+button i, a#report-button i {
+  font-size: 1.2em;
+}
+
+.back-button i {
+  font-size: 16px;
+}
+
+/* Specific icon colors */
+#start-button i {
+  color: #FFD700;
+}
+
+#shop-button i {
+  color: #FFA500;
+}
+
+#submit-answer i {
+  color: #E8F5E9;
+}
+
+#use-hint i {
+  animation: glow 2s infinite;
+}
+
+.buy-button[data-item="life"] i {
+  color: #FF6B6B;
+}
+
+.buy-button[data-item="hint"] i {
+  color: #FFD700;
+}
+
+@keyframes glow {
+  0%, 100% { text-shadow: 0 0 5px rgba(255,255,255,0.5); }
+  50% { text-shadow: 0 0 20px rgba(255,255,255,0.8); }
+}
+
+/* GitHub button */
+.github-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    font-size: 28px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    opacity: 1;
+    visibility: visible;
+}
+
+.github-button.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+    .github-button {
+        top: 10px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+        font-size: 22px;
+    }
+}
+
+.game-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 3em;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 2px;
+}
+
+.game-title span {
+    display: inline-block;
+    color: #fff;
+    text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
+    animation: letterBounce 1s ease-in-out infinite;
+}
+
+.game-title span:nth-child(2n) {
+    animation-delay: 0.2s;
+}
+
+.game-title span:nth-child(3n) {
+    animation-delay: 0.3s;
+}
+
+.game-title span:nth-child(4n) {
+    animation-delay: 0.4s;
+}
+
+@keyframes letterBounce {
+    0%, 100% {
+        transform: translateY(0) rotateZ(0);
+    }
+    25% {
+        transform: translateY(-10px) rotateZ(-3deg);
+        color: #FFD700;
+    }
+    75% {
+        transform: translateY(3px) rotateZ(3deg);
+        color: #FFA500;
+    }
+}
+
+/* Music menu styles */
+.music-option {
+  background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+  width: 100%;
+  max-width: 280px;
+  margin: 8px auto;
+  padding: 12px 20px;
+  border-radius: 25px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.music-option i {
+  font-size: 1.2em;
+  color: #fff;
+}
+
+.music-option.active {
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+  transform: translateY(-2px);
+}
+
+.music-option:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+#music-button i {
+  color: #4a90e2;
+}
+
+body[data-music="music3"] .menu {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+body[data-music="music3"] button {
+    background: linear-gradient(135deg, #411d5d, #2c003e);
+}
+
+body[data-music="music3"] button:hover {
+    background: linear-gradient(135deg, #512d6d, #3c104e);
+}
